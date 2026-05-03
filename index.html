@@ -5,35 +5,52 @@
   <title>Currency Converter</title>
 
   <style>
-    body {
-      font-family: Arial;
-      background: #e8f5e9;
-      display: flex;
-      justify-content: center;
-      padding-top: 80px;
-    }
+   body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 
-    .app {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-    }
+.app {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
 
-    input, select {
-      padding: 8px;
-      margin: 5px;
-    }
+input, select {
+  padding: 10px;
+  margin: 8px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
-    button {
-      padding: 8px;
-      cursor: pointer;
-    }
+button {
+  padding: 10px;
+  width: 85%;
+  background: #4facfe;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .result {
-      margin-top: 20px;
-    }
+button:hover {
+  background: #00c6ff;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
   </style>
 </head>
 
@@ -46,21 +63,28 @@
 
   <br>
 
-  <select id="from">
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="RUB">RUB</option>
-  </select>
+<select id="from">
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
+  <option value="RUB">RUB</option>
+  <option value="GBP">GBP</option>
+  <option value="JPY">JPY</option>
+  <option value="CNY">CNY</option>
+</select>
 
-  <select id="to">
-    <option value="RUB">RUB</option>
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-  </select>
+<select id="to">
+  <option value="RUB">RUB</option>
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
+  <option value="GBP">GBP</option>
+  <option value="JPY">JPY</option>
+  <option value="CNY">CNY</option>
+</select>
 
   <br>
 
   <button onclick="convert()">Конвертировать</button>
+  <button onclick="swap()">↔️ Поменять</button>
 
   <div class="result" id="result"></div>
 </div>
@@ -70,6 +94,14 @@ async function convert() {
   let amount = document.getElementById("amount").value;
   let from = document.getElementById("from").value;
   let to = document.getElementById("to").value;
+  function swap() {
+  let from = document.getElementById("from");
+  let to = document.getElementById("to");
+
+  let temp = from.value;
+  from.value = to.value;
+  to.value = temp;
+}
 
   if (!amount) return;
 
@@ -83,7 +115,8 @@ async function convert() {
 
   document.getElementById("result").innerText =
     `${amount} ${from} = ${result.toFixed(2)} ${to}`;
-}
+setInterval(convert, 10000);
+  
 </script>
 
 </body>
