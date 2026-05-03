@@ -94,14 +94,6 @@ async function convert() {
   let amount = document.getElementById("amount").value;
   let from = document.getElementById("from").value;
   let to = document.getElementById("to").value;
-  function swap() {
-  let from = document.getElementById("from");
-  let to = document.getElementById("to");
-
-  let temp = from.value;
-  from.value = to.value;
-  to.value = temp;
-}
 
   if (!amount) return;
 
@@ -115,8 +107,18 @@ async function convert() {
 
   document.getElementById("result").innerText =
     `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+}
+
+function swap() {
+  let from = document.getElementById("from");
+  let to = document.getElementById("to");
+
+  let temp = from.value;
+  from.value = to.value;
+  to.value = temp;
+}
+
 setInterval(convert, 10000);
-  
 </script>
 
 </body>
